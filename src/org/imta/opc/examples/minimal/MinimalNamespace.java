@@ -9,10 +9,14 @@ import org.eclipse.milo.opcua.sdk.server.api.MonitoredItem;
 import org.eclipse.milo.opcua.sdk.server.nodes.DefaultAttributeFilter;
 import org.eclipse.milo.opcua.sdk.server.nodes.UaFolderNode;
 import org.eclipse.milo.opcua.sdk.server.nodes.UaVariableNode;
+import org.eclipse.milo.opcua.sdk.server.nodes.filters.AttributeFilter;
+import org.eclipse.milo.opcua.sdk.server.nodes.filters.AttributeFilterContext;
 import org.eclipse.milo.opcua.sdk.server.nodes.filters.AttributeFilters;
 import org.eclipse.milo.opcua.sdk.server.util.SubscriptionModel;
+import org.eclipse.milo.opcua.stack.core.AttributeId;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -88,7 +92,7 @@ public class MinimalNamespace extends ManagedNamespaceWithLifecycle {
                 .build();
         node.setValue(new DataValue(new Variant(getTemperature())));
         node.getFilterChain().addLast(
-                new DefaultAttributeFilter(),
+                new AttributeFilter() {},
                 AttributeFilters.getValue(
                         ctx -> new DataValue(new Variant(getTemperature()))
                 )
