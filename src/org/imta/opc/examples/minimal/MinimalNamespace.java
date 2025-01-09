@@ -103,7 +103,7 @@ public class MinimalNamespace extends ManagedNamespaceWithLifecycle {
 
     private double getTemperature() {
         double elapsedTime = DateTime.now().getJavaTime() - startDate.getJavaTime();
-        return Math.sin(elapsedTime/1000)*30;
+        return Math.sin(elapsedTime/5000)*15+15;
     }
 
     @Override
