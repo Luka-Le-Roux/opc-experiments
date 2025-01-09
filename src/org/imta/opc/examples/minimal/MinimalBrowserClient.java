@@ -23,6 +23,7 @@ public class MinimalBrowserClient {
 
     private final String serverUrl;
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private OpcUaClient client;
 
     public MinimalBrowserClient(String serverUrl) {
         this.serverUrl = serverUrl;
@@ -31,12 +32,28 @@ public class MinimalBrowserClient {
     static public void main(String [] args) throws UaException, ExecutionException, InterruptedException {
         MinimalBrowserClient browserClient = new MinimalBrowserClient("opc.tcp://localhost:4880/minimal");
         browserClient.start();
+        browserClient.browse();
+        browserClient.stop();
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public OpcUaClient getClient() {
+        return client;
     }
 
     public void start() throws UaException, ExecutionException, InterruptedException {
-        OpcUaClient client = OpcUaClient.create(serverUrl);
+        client = OpcUaClient.create(serverUrl);
         client.connect().get();
+    }
+
+    public void browse() {
         browseNode("", client, Identifiers.ObjectsFolder);
+    }
+
+    public void stop() throws ExecutionException, InterruptedException {
         client.disconnect().get();
     }
 
