@@ -6,7 +6,7 @@ import org.eclipse.milo.opcua.sdk.server.OpcUaServer;
 import org.eclipse.milo.opcua.sdk.server.api.DataItem;
 import org.eclipse.milo.opcua.sdk.server.api.ManagedNamespaceWithLifecycle;
 import org.eclipse.milo.opcua.sdk.server.api.MonitoredItem;
-import org.eclipse.milo.opcua.sdk.server.dtd.DataTypeDictionaryManager;
+import org.eclipse.milo.opcua.sdk.server.nodes.DefaultAttributeFilter;
 import org.eclipse.milo.opcua.sdk.server.nodes.UaFolderNode;
 import org.eclipse.milo.opcua.sdk.server.nodes.UaVariableNode;
 import org.eclipse.milo.opcua.sdk.server.nodes.filters.AttributeFilters;
@@ -14,7 +14,6 @@ import org.eclipse.milo.opcua.sdk.server.util.SubscriptionModel;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.*;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 public class MinimalNamespace extends ManagedNamespaceWithLifecycle {
@@ -24,18 +23,13 @@ public class MinimalNamespace extends ManagedNamespaceWithLifecycle {
     /** Handles subscriptions **/
     private final SubscriptionModel subscriptionModel;
 
-    /** Holds discovery infos (?) **/
-    //private final DataTypeDictionaryManager dictionaryManager;
-
     private final DateTime startDate;
     private Thread lifeline;
 
     public MinimalNamespace(OpcUaServer server) {
         super(server, URI);
         this.subscriptionModel = new SubscriptionModel(server, this);
-        //this.dictionaryManager = new DataTypeDictionaryManager(getNodeContext(), URI);
         startDate = DateTime.now();
-        //getLifecycleManager().addLifecycle(dictionaryManager);
         getLifecycleManager().addLifecycle(subscriptionModel);
         getLifecycleManager().addStartupTask(this::startupTask);
         getLifecycleManager().addShutdownTask(this::shutdownTask);
@@ -94,7 +88,7 @@ public class MinimalNamespace extends ManagedNamespaceWithLifecycle {
                 .build();
         node.setValue(new DataValue(new Variant(getTemperature())));
         node.getFilterChain().addLast(
-                new AttributeLoggingFilter(),
+                new DefaultAttributeFilter(),
                 AttributeFilters.getValue(
                         ctx -> new DataValue(new Variant(getTemperature()))
                 )
