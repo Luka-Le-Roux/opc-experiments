@@ -7,6 +7,9 @@ import org.eclipse.milo.opcua.stack.server.EndpointConfiguration;
 
 import java.util.Collections;
 
+/**
+ * Minimal example of a server, hopefully generic enough to not be OPC Specific
+ */
 public class MinimalServer extends OpcUaServer {
     public MinimalServer() {
         super(buildConfig());

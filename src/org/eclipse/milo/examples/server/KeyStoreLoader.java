@@ -10,27 +10,23 @@
 
 package org.eclipse.milo.examples.server;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.UUID;
-import java.util.regex.Pattern;
-
 import com.google.common.collect.Sets;
 import org.eclipse.milo.opcua.sdk.server.util.HostnameUtil;
 import org.eclipse.milo.opcua.stack.core.util.SelfSignedCertificateBuilder;
 import org.eclipse.milo.opcua.stack.core.util.SelfSignedCertificateGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
+import java.security.*;
+import java.security.cert.X509Certificate;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 class KeyStoreLoader {
 

@@ -10,9 +10,6 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 import com.google.common.collect.ImmutableList;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.nodes.UaVariableNode;
@@ -23,6 +20,9 @@ import org.eclipse.milo.opcua.stack.core.types.enumerated.ServerState;
 import org.eclipse.milo.opcua.stack.core.types.enumerated.TimestampsToReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ReadExample implements ClientExample {
 

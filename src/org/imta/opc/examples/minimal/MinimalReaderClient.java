@@ -4,7 +4,6 @@ import org.eclipse.milo.opcua.sdk.client.nodes.UaVariableNode;
 import org.eclipse.milo.opcua.stack.core.UaException;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 public class MinimalReaderClient extends MinimalBrowserClient {
